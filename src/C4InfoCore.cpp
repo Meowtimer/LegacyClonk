@@ -417,7 +417,8 @@ void C4ObjectInfoCore::Default(C4ID n_id,
 		// Name list
 		else
 		{
-			SCopySegment(cpNames, Random(SCharCount(0x0A, cpNames)), Name, 0x0A, C4MaxName + 1);
+			auto r1 = Random(SCharCount(0x0A, cpNames));
+			SCopySegment(cpNames, r1, Name, 0x0A, C4MaxName + 1);
 			SClearFrontBack(Name);
 			SReplaceChar(Name, 0x0D, 0x00);
 		}

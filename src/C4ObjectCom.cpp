@@ -131,9 +131,10 @@ bool ObjectActionThrow(C4Object *cObj, C4Object *pThing)
 	// Set action
 	if (!cObj->SetActionByName("Throw")) return false;
 	// Exit object
+	auto r1 = Random(360);
 	pThing->Exit(cObj->x,
 		cObj->y + cObj->Shape.y - 1,
-		Random(360),
+		r1,
 		pthrow * iDir, -pthrow, pthrow * iDir);
 	// Success
 	return true;

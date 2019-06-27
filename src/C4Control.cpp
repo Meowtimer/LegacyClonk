@@ -1007,7 +1007,11 @@ void C4ControlEMDrawTool::Execute() const
 		int iMat = Game.Material.Get(szMaterial);
 		if (!MatValid(iMat)) return;
 		for (int cnt = 0; cnt < iGrade; cnt++)
-			Game.Landscape.InsertMaterial(iMat, iX + Random(iGrade) - iGrade / 2, iY + Random(iGrade) - iGrade / 2);
+		{
+			auto r2 = iY + Random(iGrade) - iGrade / 2;
+			auto r1 = iX + Random(iGrade) - iGrade / 2;
+			Game.Landscape.InsertMaterial(iMat, r1, r2);
+		}
 	}
 	break;
 	}

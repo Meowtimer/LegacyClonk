@@ -578,9 +578,9 @@ int32_t FnFxFireStart(C4AulContext *ctx, C4Object *pObj, int32_t iNumber, int32_
 	{
 		// set default fire modes
 		uint32_t dwCat = pObj->Category;
-		if (dwCat & (C4D_Living | C4D_StaticBack)) // Tiere, Bäume
+		if (dwCat & (C4D_Living | C4D_StaticBack)) // Tiere, Bï¿½ume
 			iFireMode = C4Fx_FireMode_LivingVeg;
-		else if (dwCat & (C4D_Structure | C4D_Vehicle)) // Gebäude und Fahrzeuge sind unten meist kantig
+		else if (dwCat & (C4D_Structure | C4D_Vehicle)) // Gebï¿½ude und Fahrzeuge sind unten meist kantig
 			iFireMode = C4Fx_FireMode_StructVeh;
 		else
 			iFireMode = C4Fx_FireMode_Object;
@@ -779,12 +779,18 @@ void Splash(int32_t tx, int32_t ty, int32_t amt, C4Object *pByObj)
 			// Splash bubbles and liquid
 			for (int32_t cnt = 0; cnt < amt; cnt++)
 			{
-				BubbleOut(tx + Random(16) - 8, ty + Random(16) - 6);
+				auto r2 = Random(16);
+				auto r1 = Random(16);
+				BubbleOut(tx + r1 - 8, ty + r2 - 6);
 				if (GBackLiquid(tx, ty) && !GBackSemiSolid(tx, sy))
+				{
+					auto r2 = FIXED100(-Random(200));
+					auto r1 = FIXED100(Random(151) - 75);
 					Game.PXS.Create(Game.Landscape.ExtractMaterial(tx, ty),
 						itofix(tx), itofix(sy),
-						FIXED100(Random(151) - 75),
-						FIXED100(-Random(200)));
+						r1,
+						r2);
+				}
 			}
 		}
 	// Splash sound

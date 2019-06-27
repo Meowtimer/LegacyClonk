@@ -415,16 +415,24 @@ static C4Value FnSplit2Components(C4AulContext *cthr, C4Value *pPars)
 	pObj->Def->GetComponents(&ObjComponents, pObj, cthr->Obj);
 	if (pObj->Contained) pObj->Exit(pObj->x, pObj->y);
 	for (cnt = 0; ObjComponents.GetID(cnt); cnt++)
+	{
 		for (cnt2 = 0; cnt2 < ObjComponents.GetCount(cnt); cnt2++)
+		{
+			auto r4 = itofix(Rnd3());
+			auto r3 = itofix(Rnd3());
+			auto r2 = itofix(Rnd3());
+			auto r1 = Random(360);
 			if (pNew = Game.CreateObject(ObjComponents.GetID(cnt),
 				pObj,
 				pObj->Owner,
-				pObj->x, pObj->y, Random(360),
-				itofix(Rnd3()), itofix(Rnd3()), itofix(Rnd3())))
+				pObj->x, pObj->y,
+				r1, r2, r3, r4))
 			{
 				if (pObj->GetOnFire()) pNew->Incinerate(pObj->Owner);
 				if (pContainer) pNew->Enter(pContainer);
 			}
+		}
+	}
 	pObj->AssignRemoval();
 	return C4VTrue;
 }
@@ -3150,10 +3158,11 @@ static long FnLaunchLightning(C4AulContext *cthr, long x, long y, long xdir, lon
 
 static long FnLaunchVolcano(C4AulContext *cthr, long x)
 {
+	auto r1 = Random(10);
 	return Game.Weather.LaunchVolcano(
 		Game.Material.Get("Lava"),
 		x, GBackHgt - 1,
-		BoundBy(15 * GBackHgt / 500 + Random(10), 10, 60));
+		BoundBy(15 * GBackHgt / 500 + r1, 10, 60));
 }
 
 static bool FnLaunchEarthquake(C4AulContext *cthr, long x, long y)

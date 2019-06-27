@@ -158,7 +158,8 @@ void C4MapCreator::Create(CSurface8 *sfcMap,
 					sptx = Random(MapWdt);
 					for (spty = 0; (spty < MapHgt) && (GetPix(sptx, spty) != Exclusive); spty++);
 					spty += 5 + Random((MapHgt - spty) - 10);
-					DrawLayer(sptx, spty, Random(15), ccol);
+					auto r1 = Random(15);
+					DrawLayer(sptx, spty, r1, ccol);
 				}
 			}
 
